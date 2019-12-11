@@ -7,5 +7,7 @@ public interface BErrorCode {
 
     int ERR_CODE_DB_SQL_EXEC_FAILURE = 300;
 
+    int ERR_CODE_SYSTEM_INTERNAL_ERROR = 501;
+
 
 }

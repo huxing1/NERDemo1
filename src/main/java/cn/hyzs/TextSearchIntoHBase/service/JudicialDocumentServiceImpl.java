@@ -2,21 +2,17 @@ package cn.hyzs.TextSearchIntoHBase.service;
 
 import cn.hyzs.TextSearchIntoHBase.dao.JudicialDocumentDAO;
 import cn.hyzs.TextSearchIntoHBase.db.entity.JudicialDocumentInfo;
-import cn.hyzs.TextSearchIntoHBase.utils.DateUtils;
 import cn.hyzs.TextSearchIntoHBase.vo.JudicialDocumentVO;
-import com.baomidou.mybatisplus.annotation.TableField;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
+@Service
 public class JudicialDocumentServiceImpl implements JudicialDocumentService {
     @Autowired
     private JudicialDocumentDAO judicialDocumentDAO;
-
 
 
     @Override
@@ -30,15 +26,15 @@ public class JudicialDocumentServiceImpl implements JudicialDocumentService {
     }
 
     @Override
-    public  JudicialDocumentVO queryJudicialDocumentInfoByCreateTime(Timestamp createTime) {
-            JudicialDocumentInfo judicialDocumentInfo=
-                    judicialDocumentDAO.queryJudicialDocumentInfoByField(createTime);
-            JudicialDocumentVO judicialDocumentVO=this.prepareVO(judicialDocumentInfo);
-            return judicialDocumentVO;
-        }
+    public JudicialDocumentVO queryJudicialDocumentInfoByCreateTime(Timestamp createTime) {
+        JudicialDocumentInfo judicialDocumentInfo =
+                judicialDocumentDAO.queryJudicialDocumentInfoByField(createTime);
+        JudicialDocumentVO judicialDocumentVO = this.prepareVO(judicialDocumentInfo);
+        return judicialDocumentVO;
+    }
 
-        private JudicialDocumentVO prepareVO(JudicialDocumentInfo judicialDocumentInfo){
-            JudicialDocumentVO judicialDocumentVO=null;
+    private JudicialDocumentVO prepareVO(JudicialDocumentInfo judicialDocumentInfo) {
+        JudicialDocumentVO judicialDocumentVO = null;
         judicialDocumentVO.setCaseNum(judicialDocumentInfo.getCasenum());
         judicialDocumentVO.setContent(judicialDocumentInfo.getContent());
         judicialDocumentVO.setCreateTime(judicialDocumentInfo.getCreateTime());
@@ -51,8 +47,6 @@ public class JudicialDocumentServiceImpl implements JudicialDocumentService {
         judicialDocumentVO.setUrl(judicialDocumentInfo.getUrl());
         return judicialDocumentVO;
     }
-
-
 
 
 }

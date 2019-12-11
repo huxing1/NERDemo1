@@ -1,10 +1,10 @@
 package cn.hyzs.TextSearchIntoHBase.dao;
 
 import cn.hyzs.TextSearchIntoHBase.db.entity.JudicialDocumentInfo;
-import cn.hyzs.TextSearchIntoHBase.db.mapper.JudicialDocumentInfoMapper;
+import cn.hyzs.TextSearchIntoHBase.db.mapper.JudicialInfoMapper;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -12,12 +12,13 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class JudicialDocumentDAOImpl implements JudicialDocumentDAO {
     @Autowired
     private  JudicialDocumentDAO judicialDocumentDAO;
 
     @Autowired
-    private JudicialDocumentInfoMapper judicialDocumentInfoMapper;
+    private JudicialInfoMapper judicialInfoMapper;
     @Override
     public JudicialDocumentInfo queryJudicialDocumentInfoByDocId(String docId) {
         List list=new ArrayList<>();
@@ -26,25 +27,17 @@ public class JudicialDocumentDAOImpl implements JudicialDocumentDAO {
 //        }
         return null;
 
-    }
 
+    }
     @Override
     public JudicialDocumentInfo queryJudicialDocumentInfoByField( Timestamp createTime) {
-        QueryWrapper<JudicialDocumentInfo> queryWrapper=new QueryWrapper();
-        queryWrapper.eq("create_time",createTime);
-        return judicialDocumentInfoMapper.selectOne(queryWrapper);
+//        QueryWrapper<JudicialDocumentInfo> queryWrapper=new QueryWrapper();
+//        queryWrapper.eq("create_time",createTime);
+        JudicialDocumentInfo judicialDocumentInfo=
+                       judicialInfoMapper.queryByCreateTime(createTime);
+        return judicialDocumentInfo;
     }
 
-//    public static void main(String[] args) {
-//        JudicialDocumentInfo judicialDocumentInfo=
-//                judicialDocumentDAO.queryJudicialDocumentInfoByField("doc_id",);
-//        String content=judicialDocumentInfo.getContent();
-//        String docId=judicialDocumentInfo.getDocId();
-//        String title=judicialDocumentInfo.getTitle();
-//        System.out.println(content);
-//        System.out.println(docId);
-//        System.out.println(title);
-//    }
     public static void main(String[] args)
     {
         try

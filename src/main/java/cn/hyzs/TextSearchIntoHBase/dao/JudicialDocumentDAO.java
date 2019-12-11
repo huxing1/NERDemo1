@@ -1,6 +1,7 @@
 package cn.hyzs.TextSearchIntoHBase.dao;
 
 import cn.hyzs.TextSearchIntoHBase.db.entity.JudicialDocumentInfo;
+import org.apache.ibatis.annotations.Select;
 
 import java.sql.Timestamp;
 import java.util.List;
